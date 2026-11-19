@@ -111,52 +111,90 @@
         </div>
     </div>
 
-    <!-- ================= SKRIN GALERI VIDEO ================= -->
-    <div id="gallery-screen" class="hidden min-h-screen p-6 md:p-12 relative z-10">
-        <!-- Butang Kembali -->
+    <!-- ================= SKRIN GALERI VIDEO (SIRI 1 - 6 BAHAGIAN) ================= -->
+    <div id="gallery-screen" dir="rtl" class="hidden min-h-screen p-6 md:p-12 relative z-10">
+        <!-- Butang Kembali (العودة) -->
         <button onclick="goHome()" class="mb-8 btn-blob btn-yellow py-2 px-6 font-bold inline-flex items-center gap-2 shadow-md">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Kembali
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            العودة
         </button>
 
-        <h2 class="text-4xl text-center mb-10 text-[#5C4B51]">Koleksi Cerita Kami</h2>
+        <!-- Tajuk Utama Galeri -->
+        <h2 class="text-4xl text-center mb-2 text-[#5C4B51]">مجموعة فيديوهات السلسلة الأولى</h2>
+        <p class="text-center text-gray-500 font-semibold mb-10">اختر الفيديو الذي تريد مشاهدته</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             
-            <!-- Item Galeri 1 -->
+            <!-- BAHAGIAN 1 -->
             <div class="watercolor-card p-4 flex flex-col items-center">
                 <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-pink-200">
-                    <!-- TUKAR LINK VIDEO GALERI 1 DI SINI -->
-                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/F9A8D4/ffffff?text=Huruf+Hijaiyah+1">
-                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/alif.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <h3 class="text-xl mb-2 text-[#0F766E]">Mengenali Huruf Hijaiyah</h3>
-                <p class="text-center text-sm text-gray-500 font-medium pb-2">Belajar Mengenali Al-Huruf Al-Hijaiyah.</p>
-            </div>
-
-            <!-- Item Galeri 2 -->
-            <div class="watercolor-card p-4 flex flex-col items-center">
-                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-teal-200">
-                    <!-- TUKAR LINK VIDEO GALERI 2 DI SINI -->
-                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/99F6E4/0F766E?text=Video+Cerita+2">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <h3 class="text-xl mb-2 text-[#0F766E]">Bawang Putih Bawang Merah</h3>
-                <p class="text-center text-sm text-gray-500 font-medium pb-2">Cerita ketabahan dan kebaikan hati.</p>
-            </div>
-            
-            <!-- Item Galeri 3 (TAMBAHAN BARU) -->
-            <div class="watercolor-card p-4 flex flex-col items-center">
-                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-yellow-300">
-                    <!-- LETAK LINK VIDEO GITHUB ANDA DI SINI -->
-                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/FDE047/854D0E?text=Video+Baru">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/F9A8D4/ffffff?text=Video+1">
+                        <!-- TUKAR NAMA FAIL VIDEO 1 DI SINI -->
                         <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/videoplayback_6.mp4" type="video/mp4">
                     </video>
                 </div>
-                <h3 class="text-xl mb-2 text-[#854D0E]">Huruf Hijaiyah</h3>
-                <p class="text-center text-sm text-gray-500 font-medium pb-2">Penerangan tentang Huruf Hijaiyah.</p>
+                <h3 class="text-xl mb-2 text-[#0F766E]">١. الفيديو الأول</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم الأول من السلسلة.</p>
+            </div>
+
+            <!-- BAHAGIAN 2 -->
+            <div class="watercolor-card p-4 flex flex-col items-center">
+                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-teal-200">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/99F6E4/0F766E?text=Video+2">
+                        <!-- TUKAR NAMA FAIL VIDEO 2 DI SINI -->
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="text-xl mb-2 text-[#0F766E]">٢. الفيديو الثاني</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم الثاني من السلسلة.</p>
+            </div>
+
+            <!-- BAHAGIAN 3 -->
+            <div class="watercolor-card p-4 flex flex-col items-center">
+                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-purple-200">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/D8B4FE/6B21A8?text=Video+3">
+                        <!-- TUKAR NAMA FAIL VIDEO 3 DI SINI -->
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="text-xl mb-2 text-[#6B21A8]">٣. الفيديو الثالث</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم الثالث من السلسلة.</p>
+            </div>
+
+            <!-- BAHAGIAN 4 -->
+            <div class="watercolor-card p-4 flex flex-col items-center">
+                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-orange-200">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/FDBA74/9A3412?text=Video+4">
+                        <!-- TUKAR NAMA FAIL VIDEO 4 DI SINI -->
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-4.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="text-xl mb-2 text-[#9A3412]">٤. الفيديو الرابع</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم الرابع من السلسلة.</p>
+            </div>
+
+            <!-- BAHAGIAN 5: HURUF HIJAIYAH -->
+            <div class="watercolor-card p-4 flex flex-col items-center">
+                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-yellow-300">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/FDE047/854D0E?text=Huruf+Hijaiyah">
+                        <!-- LINK VIDEO HURUF HIJAIYAH -->
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="text-xl mb-2 text-[#854D0E]">٥. الحروف الهجائية</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">هيا نتعلم ونتعرف على الحروف الهجائية!</p>
+            </div>
+
+            <!-- BAHAGIAN 6 -->
+            <div class="watercolor-card p-4 flex flex-col items-center">
+                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-blue-200">
+                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/93C5FD/1E40AF?text=Video+6">
+                        <!-- TUKAR NAMA FAIL VIDEO 6 DI SINI -->
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-6.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="text-xl mb-2 text-[#1E40AF]">٦. الفيديو السادس</h3>
+                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم السادس من السلسلة.</p>
             </div>
 
         </div>
