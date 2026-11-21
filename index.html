@@ -169,7 +169,7 @@
             <div class="watercolor-card p-4 flex flex-col items-center">
                 <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-orange-200">
                     <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/FDBA74/9A3412?text=Video+4">
-                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-4.mp4" type="video/mp4">
+                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" type="video/mp4">
                     </video>
                 </div>
                 <h3 class="text-xl mb-2 text-[#9A3412]">٤. الفيديو الرابع</h3>
@@ -185,17 +185,6 @@
                 </div>
                 <h3 class="text-xl mb-2 text-[#854D0E]">٥. الحروف الهجائية</h3>
                 <p class="text-center text-sm text-gray-500 font-medium pb-2">هيا نتعلم ونتعرف على الحروف الهجائية!</p>
-            </div>
-
-            <!-- BAHAGIAN 6 -->
-            <div class="watercolor-card p-4 flex flex-col items-center">
-                <div class="w-full aspect-video bg-gray-200 rounded-2xl overflow-hidden mb-4 border-2 border-dashed border-blue-200">
-                    <video controls class="w-full h-full object-cover" poster="https://placehold.co/600x400/93C5FD/1E40AF?text=Video+6">
-                        <source src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/VIDEO-6.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <h3 class="text-xl mb-2 text-[#1E40AF]">٦. الفيديو السادس</h3>
-                <p class="text-center text-sm text-gray-500 font-medium pb-2">وصف قصير للقسم السادس من السلسلة.</p>
             </div>
 
         </div>
@@ -215,34 +204,55 @@
             <!-- ========================================================================= -->
             <!-- SILA TUKAR LINK "targets.mind" DI BAWAH KEPADA LINK GITHUB ANDA SENDIRI -->
             <!-- ========================================================================= -->
-            <a-scene 
-                mindar-image="imageTargetSrc: https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/targets.mind?v=2; autoStart: false;" 
+           <a-scene 
+                mindar-image="imageTargetSrc: https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/targets.mind?v=4; autoStart: false;" 
                 color-space="sRGB" 
                 renderer="colorManagement: true, physicallyCorrectLights" 
                 vr-mode-ui="enabled: false" 
                 device-orientation-permission-ui="enabled: false">
                 
                 <a-assets>
-                    <!-- ========================================================================= -->
-                    <!-- SILA TUKAR LINK VIDEO ".mp4" DI BAWAH KEPADA LINK VIDEO GITHUB ANDA -->
-                    <!-- ========================================================================= -->
-                    <!-- VIDEO 1 -->
-                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/videoplayback_6.mp4" loop crossorigin="anonymous" playsinline></video>
+                    <!-- VIDEO 1: SCENE 1 -->
+                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-1.mp4" loop crossorigin="anonymous" playsinline muted></video>
                     
-                    <!-- VIDEO 2 -->
-                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/alif.mp4" loop crossorigin="anonymous" playsinline></video>
+                    <!-- VIDEO 2: SCENE 2 -->
+                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-2.mp4" loop crossorigin="anonymous" playsinline muted></video>
+
+                    <!-- VIDEO 3: SCENE 3 -->
+                    <video id="ar-video-3" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-3.mp4" loop crossorigin="anonymous" playsinline muted></video>
+
+                    <!-- VIDEO 4: SCENE 4 -->
+                    <video id="ar-video-4" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" loop crossorigin="anonymous" playsinline muted></video>
+
+                    <!-- VIDEO 5: HURUF HIJAIYAH -->
+                    <video id="ar-video-5" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" loop crossorigin="anonymous" playsinline muted></video>
                 </a-assets>
 
                 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-                <!-- TARGET GAMBAR 1 -->
+                <!-- TARGET GAMBAR 1 (Index 0 -> Scene 1) -->
                 <a-entity mindar-image-target="targetIndex: 0" id="target-1">
                     <a-video src="#ar-video-1" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-video>
                 </a-entity>
 
-                <!-- TARGET GAMBAR 2 -->
+                <!-- TARGET GAMBAR 2 (Index 1 -> Scene 2) -->
                 <a-entity mindar-image-target="targetIndex: 1" id="target-2">
                     <a-video src="#ar-video-2" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-video>
+                </a-entity>
+
+                <!-- TARGET GAMBAR 3 (Index 2 -> Scene 3) -->
+                <a-entity mindar-image-target="targetIndex: 2" id="target-3">
+                    <a-video src="#ar-video-3" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-video>
+                </a-entity>
+
+                <!-- TARGET GAMBAR 4 (Index 3 -> Scene 4) -->
+                <a-entity mindar-image-target="targetIndex: 3" id="target-4">
+                    <a-video src="#ar-video-4" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-video>
+                </a-entity>
+
+                <!-- TARGET GAMBAR 5 (Index 4 -> Huruf Hijaiyah) -->
+                <a-entity mindar-image-target="targetIndex: 4" id="target-5">
+                    <a-video src="#ar-video-5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-video>
                 </a-entity>
 
             </a-scene>
@@ -254,6 +264,7 @@
         const homeScreen = document.getElementById('home-screen');
         const galleryScreen = document.getElementById('gallery-screen');
         const arScreen = document.getElementById('ar-screen');
+        const arInstruction = document.getElementById('ar-instruction');
         let arSystem = null;
 
         function showGallery() {
@@ -284,52 +295,39 @@
             if (arSystem) {
                 arSystem.stop();
             }
-            const video = document.querySelector('#ar-video-1');
-            if(video) video.pause();
+            // Hentikan kesemua 5 video apabila kamera AR ditutup
+            for (let i = 1; i <= 5; i++) {
+                const vid = document.querySelector('#ar-video-' + i);
+                if (vid) vid.pause();
+            }
             goHome();
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const target = document.querySelector('#target-1');
-            const video = document.querySelector('#ar-video-1');
+            const arTargets = [
+                { targetId: '#target-1', videoId: '#ar-video-1', title: '✨ الفيديو الأول (Scene 1) ✨', color: 'text-[#0F766E]' },
+                { targetId: '#target-2', videoId: '#ar-video-2', title: '✨ الفيديو الثاني (Scene 2) ✨', color: 'text-[#0F766E]' },
+                { targetId: '#target-3', videoId: '#ar-video-3', title: '✨ الفيديو الثالث (Scene 3) ✨', color: 'text-[#6B21A8]' },
+                { targetId: '#target-4', videoId: '#ar-video-4', title: '✨ الفيديو الرابع (Scene 4) ✨', color: 'text-[#9A3412]' },
+                { targetId: '#target-5', videoId: '#ar-video-5', title: '✨ الحروف الهجائية ✨', color: 'text-[#854D0E]' }
+            ];
 
-             // KOD UNTUK GAMBAR AR KEDUA
-            const target2 = document.querySelector('#target-2');
-            const video2 = document.querySelector('#ar-video-2');
+            arTargets.forEach(item => {
+                const targetEl = document.querySelector(item.targetId);
+                const videoEl = document.querySelector(item.videoId);
 
-            if(target2 && video2) {
-                target2.addEventListener("targetFound", event => {
-                    console.log("Gambar Ke-2 Dikesan!");
-                    document.getElementById('ar-instruction').innerHTML = "<p class='text-[#0F766E] font-bold text-sm text-center'>✨ Cerita ke-2 dijumpai! ✨</p>";
-                    video2.play().catch(e => console.log("Auto-play disekat"));
-                });
-
-                target2.addEventListener("targetLost", event => {
-                    document.getElementById('ar-instruction').innerHTML = "<p class='text-[#5C4B51] font-bold text-sm text-center'>✨ Halakan kamera pada gambar (Artwork) untuk melihat keajaiban! ✨</p>";
-                    video2.pause();
-                });
-            }
-
-            if(target && video) {
-                target.addEventListener("targetFound", event => {
-                    console.log("Gambar Dikesan! Memainkan video...");
-                    document.getElementById('ar-instruction').innerHTML = "<p class='text-[#0F766E] font-bold text-sm text-center'>✨ Gambar dijumpai! Menonton cerita... ✨</p>";
-                    document.getElementById('ar-instruction').classList.replace('border-pink-200', 'border-teal-300');
-                    document.getElementById('ar-instruction').classList.add('bg-teal-50');
-                    
-                    video.play().catch(e => {
-                        console.log("Auto-play disekat oleh pelayar. Pengguna perlu berinteraksi.");
+                if (targetEl && videoEl) {
+                    targetEl.addEventListener("targetFound", () => {
+                        arInstruction.innerHTML = `<p class='${item.color} font-bold text-sm text-center'>${item.title}</p>`;
+                        videoEl.play().catch(e => console.log("Auto-play disekat:", e));
                     });
-                });
 
-                target.addEventListener("targetLost", event => {
-                    console.log("Gambar Hilang. Berhenti video.");
-                    document.getElementById('ar-instruction').innerHTML = "<p class='text-[#5C4B51] font-bold text-sm text-center'>✨ Halakan kamera pada gambar (Artwork) untuk melihat keajaiban! ✨</p>";
-                    document.getElementById('ar-instruction').classList.replace('border-teal-300', 'border-pink-200');
-                    document.getElementById('ar-instruction').classList.remove('bg-teal-50');
-                    video.pause();
-                });
-            }
+                    targetEl.addEventListener("targetLost", () => {
+                        arInstruction.innerHTML = "<p class='text-[#5C4B51] font-bold text-sm text-center'>✨ Halakan kamera pada gambar (Artwork) untuk melihat keajaiban! ✨</p>";
+                        videoEl.pause();
+                    });
+                }
+            });
         });
     </script>
 </body>
