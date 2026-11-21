@@ -193,8 +193,11 @@
     <!-- ================= SKRIN KAMERA AR ================= -->
     <div id="ar-screen" class="hidden">
         <div id="ar-container">
-            <!-- Butang Tutup Kamera AR -->
+            <!-- Butang Tutup Kamera AR (Sedia Ada) -->
             <button onclick="stopAR()" class="absolute top-6 right-6 z-[100] bg-white text-red-500 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-2 border-red-200 font-bold text-xl">X</button>
+            
+            <!-- TAMBAH INI: Butang Bunyi (🔊 / 🔇) -->
+            <button id="sound-btn" onclick="toggleSound()" class="absolute top-20 right-6 z-[100] bg-white text-[#0F766E] rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-2 border-teal-200 font-bold text-xl">🔊</button>
             
             <!-- Mesej Bantuan / Arahan -->
             <div id="ar-instruction" class="absolute top-6 left-6 right-24 z-[100] bg-white/90 backdrop-blur rounded-2xl p-3 shadow-lg border-2 border-pink-200 pointer-events-none">
@@ -213,19 +216,19 @@
                 
                 <a-assets>
                     <!-- VIDEO 1: SCENE 1 -->
-                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-1.mp4" loop crossorigin="anonymous" playsinline muted></video>
+                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-1.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
                     
                     <!-- VIDEO 2: SCENE 2 -->
-                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-2.mp4" loop crossorigin="anonymous" playsinline muted></video>
+                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-2.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 3: SCENE 3 -->
-                    <video id="ar-video-3" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-3.mp4" loop crossorigin="anonymous" playsinline muted></video>
+                    <video id="ar-video-3" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-3.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 4: SCENE 4 -->
-                    <video id="ar-video-4" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" loop crossorigin="anonymous" playsinline muted></video>
+                    <video id="ar-video-4" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 5: HURUF HIJAIYAH -->
-                    <video id="ar-video-5" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" loop crossorigin="anonymous" playsinline muted></video>
+                    <video id="ar-video-5" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
                 </a-assets>
 
                 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -266,6 +269,15 @@
         const arScreen = document.getElementById('ar-screen');
         const arInstruction = document.getElementById('ar-instruction');
         let arSystem = null;
+        let isMuted = false; // Suara dibuka secara automatik
+        let activeVideo = null; // Menyimpan video yang sedang diimbas
+
+        function updateSoundButton() {
+            const soundBtn = document.getElementById('sound-btn');
+            if (soundBtn) {
+                soundBtn.innerText = isMuted ? '🔇' : '🔊';
+            }
+        }
 
         function showGallery() {
             homeScreen.classList.add('hidden');
@@ -283,11 +295,53 @@
             homeScreen.classList.add('hidden');
             galleryScreen.classList.add('hidden');
             arScreen.classList.remove('hidden');
-            
+            isMuted = false;
+            updateSoundButton();
+
+            // Buka kunci suara pada telefon pintar semasa butang AR ditekan
+            for (let i = 1; i <= 5; i++) {
+                const vid = document.querySelector('#ar-video-' + i);
+                if (vid) {
+                    vid.removeAttribute('muted');
+                    vid.muted = false;
+                    vid.volume = 1.0;
+                    const playPromise = vid.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            vid.pause();
+                            vid.currentTime = 0;
+                        }).catch(e => {
+                            console.log("Menunggu interaksi pengguna untuk video " + i);
+                        });
+                    }
+                }
+            }
+
             const sceneEl = document.querySelector('a-scene');
             arSystem = sceneEl.systems["mindar-image-system"];
-            if(arSystem) {
+            if (arSystem) {
                 arSystem.start();
+            }
+        }
+
+        function toggleSound() {
+            isMuted = !isMuted;
+            updateSoundButton();
+
+            for (let i = 1; i <= 5; i++) {
+                const vid = document.querySelector('#ar-video-' + i);
+                if (vid) {
+                    vid.muted = isMuted;
+                    if (!isMuted) {
+                        vid.removeAttribute('muted');
+                        vid.volume = 1.0;
+                    }
+                }
+            }
+
+            // Pastikan video yang sedang diimbas terus bersuara apabila butang ditekan
+            if (activeVideo && !isMuted) {
+                activeVideo.play().catch(e => console.log("Ralat mainkan semula:", e));
             }
         }
 
@@ -295,10 +349,14 @@
             if (arSystem) {
                 arSystem.stop();
             }
+            activeVideo = null;
             // Hentikan kesemua 5 video apabila kamera AR ditutup
             for (let i = 1; i <= 5; i++) {
                 const vid = document.querySelector('#ar-video-' + i);
-                if (vid) vid.pause();
+                if (vid) {
+                    vid.pause();
+                    vid.currentTime = 0;
+                }
             }
             goHome();
         }
@@ -318,11 +376,23 @@
 
                 if (targetEl && videoEl) {
                     targetEl.addEventListener("targetFound", () => {
+                        activeVideo = videoEl;
                         arInstruction.innerHTML = `<p class='${item.color} font-bold text-sm text-center'>${item.title}</p>`;
-                        videoEl.play().catch(e => console.log("Auto-play disekat:", e));
+                        videoEl.muted = isMuted;
+                        videoEl.volume = 1.0;
+
+                        videoEl.play().catch(e => {
+                            // Jika telefon masih menyekat suara automatik, mainkan senyap dahulu dan tukar ikon ke 🔇
+                            console.log("Suara automatik disekat telefon, sila tekan butang bunyi:", e);
+                            isMuted = true;
+                            videoEl.muted = true;
+                            updateSoundButton();
+                            videoEl.play();
+                        });
                     });
 
                     targetEl.addEventListener("targetLost", () => {
+                        if (activeVideo === videoEl) activeVideo = null;
                         arInstruction.innerHTML = "<p class='text-[#5C4B51] font-bold text-sm text-center'>✨ Halakan kamera pada gambar (Artwork) untuk melihat keajaiban! ✨</p>";
                         videoEl.pause();
                     });
