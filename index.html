@@ -74,7 +74,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 50;
-            background: black;
+            background: transparent;
         }
     </style>
 </head>
@@ -214,21 +214,21 @@
                 vr-mode-ui="enabled: false" 
                 device-orientation-permission-ui="enabled: false">
                 
-                <a-assets>
+                <<a-assets>
                     <!-- VIDEO 1: SCENE 1 -->
-                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-1.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
+                    <video id="ar-video-1" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-1.mp4" preload="metadata" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
                     
                     <!-- VIDEO 2: SCENE 2 -->
-                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-2.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
+                    <video id="ar-video-2" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-2.mp4" preload="metadata" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 3: SCENE 3 -->
-                    <video id="ar-video-3" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-3.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
+                    <video id="ar-video-3" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-3.mp4" preload="metadata" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 4: SCENE 4 -->
-                    <video id="ar-video-4" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
+                    <video id="ar-video-4" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/scene-4.mp4" preload="metadata" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
 
                     <!-- VIDEO 5: HURUF HIJAIYAH -->
-                    <video id="ar-video-5" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" preload="auto" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
+                    <video id="ar-video-5" src="https://larkasaprod.github.io/Al-Usrah-Al-Mahbubah/Huruf-Hijaiyah.mp4" preload="metadata" loop crossorigin="anonymous" playsinline webkit-playsinline></video>
                 </a-assets>
 
                 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -269,8 +269,8 @@
         const arScreen = document.getElementById('ar-screen');
         const arInstruction = document.getElementById('ar-instruction');
         let arSystem = null;
-        let isMuted = false; // Suara dibuka secara automatik
-        let activeVideo = null; // Menyimpan video yang sedang diimbas
+        let isMuted = false;
+        let activeVideo = null;
 
         function updateSoundButton() {
             const soundBtn = document.getElementById('sound-btn');
@@ -298,30 +298,14 @@
             isMuted = false;
             updateSoundButton();
 
-            // Buka kunci suara pada telefon pintar semasa butang AR ditekan
-            for (let i = 1; i <= 5; i++) {
-                const vid = document.querySelector('#ar-video-' + i);
-                if (vid) {
-                    vid.removeAttribute('muted');
-                    vid.muted = false;
-                    vid.volume = 1.0;
-                    const playPromise = vid.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            vid.pause();
-                            vid.currentTime = 0;
-                        }).catch(e => {
-                            console.log("Menunggu interaksi pengguna untuk video " + i);
-                        });
-                    }
+            // Beri masa 100ms supaya skrin AR bersedia sepenuhnya sebelum hidupkan kamera
+            setTimeout(() => {
+                const sceneEl = document.querySelector('a-scene');
+                if (sceneEl && sceneEl.systems["mindar-image-system"]) {
+                    arSystem = sceneEl.systems["mindar-image-system"];
+                    arSystem.start();
                 }
-            }
-
-            const sceneEl = document.querySelector('a-scene');
-            arSystem = sceneEl.systems["mindar-image-system"];
-            if (arSystem) {
-                arSystem.start();
-            }
+            }, 100);
         }
 
         function toggleSound() {
@@ -339,7 +323,6 @@
                 }
             }
 
-            // Pastikan video yang sedang diimbas terus bersuara apabila butang ditekan
             if (activeVideo && !isMuted) {
                 activeVideo.play().catch(e => console.log("Ralat mainkan semula:", e));
             }
@@ -350,7 +333,6 @@
                 arSystem.stop();
             }
             activeVideo = null;
-            // Hentikan kesemua 5 video apabila kamera AR ditutup
             for (let i = 1; i <= 5; i++) {
                 const vid = document.querySelector('#ar-video-' + i);
                 if (vid) {
@@ -382,8 +364,7 @@
                         videoEl.volume = 1.0;
 
                         videoEl.play().catch(e => {
-                            // Jika telefon masih menyekat suara automatik, mainkan senyap dahulu dan tukar ikon ke 🔇
-                            console.log("Suara automatik disekat telefon, sila tekan butang bunyi:", e);
+                            // Jika telefon sekat suara automatik, mainkan video dahulu dan tukar ikon kepada 🔇
                             isMuted = true;
                             videoEl.muted = true;
                             updateSoundButton();
